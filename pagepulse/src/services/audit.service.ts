@@ -3,4 +3,6 @@ export const auditService = async (url: string) => {
     url,
     message: "Audit service working",
   };
+
+  // throw new Error("Testing Global Error Handler");
 };
