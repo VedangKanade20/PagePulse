@@ -9,6 +9,8 @@ import routes from "./routes/index.js";
 import { errorHandler } from "./middlewares/errorHandler.js";
 import { requestId } from "./middlewares/requestId.js";
 import { httpLogger } from "./middlewares/logger.js";
+import { auditRateLimiter } from "./middlewares/rateLimiter.js";
+import { concurrencyLimiter } from "./middlewares/concurrency.js";
 
 const app = express();
 
@@ -23,6 +25,10 @@ app.use(express.json());
 app.use(requestId);
 
 app.use(httpLogger);
+
+app.use(auditRateLimiter);
+
+app.use(concurrencyLimiter);
 
 // app.use(morgan("dev"));
 
