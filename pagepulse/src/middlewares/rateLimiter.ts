@@ -3,7 +3,7 @@ import rateLimit from "express-rate-limit";
 export const auditRateLimiter = rateLimit({
   windowMs: 60 * 1000, // 1 minute
 
-  limit: 5,
+  limit: 1000,
 
   standardHeaders: true,
 
