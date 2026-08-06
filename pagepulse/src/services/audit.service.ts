@@ -35,15 +35,15 @@ export const auditService = async (url: string) => {
   // STEP 1
   // Check cache FIRST
 
-  const cachedAudit = await cacheService.get(cacheKey);
+  // const cachedAudit = await cacheService.get(cacheKey);
 
-  if (cachedAudit) {
-    return {
-      ...JSON.parse(cachedAudit),
+  // if (cachedAudit) {
+  //   return {
+  //     ...JSON.parse(cachedAudit),
 
-      cached: true,
-    };
-  }
+  //     cached: true,
+  //   };
+  // }
 
   // STEP 2
   // Cache miss -> hit website
@@ -81,12 +81,16 @@ export const auditService = async (url: string) => {
   // STEP 3
   // Save into Redis
 
+  const cacheTtl = Number(process.env.CACHE_TTL);
+  const ttlSeconds =
+    Number.isInteger(cacheTtl) && cacheTtl > 0 ? cacheTtl : 3600;
+
   await cacheService.set(
     cacheKey,
 
     audit,
 
-    Number(process.env.CACHE_TTL),
+    ttlSeconds,
   );
 
   // STEP 4

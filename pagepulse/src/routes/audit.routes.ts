@@ -6,6 +6,6 @@ import { auditRateLimiter } from "../middlewares/rateLimiter.js";
 
 const router = Router();
 
-router.post("/", validate(auditSchema), auditRateLimiter, auditUrl);
+router.post("/", auditRateLimiter, validate(auditSchema), auditUrl);
 
 export default router;

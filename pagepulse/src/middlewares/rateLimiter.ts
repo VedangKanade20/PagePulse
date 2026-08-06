@@ -13,6 +13,7 @@ export const auditRateLimiter = rateLimit({
     success: false,
     error: {
       code: "RATE_LIMIT_EXCEEDED",
+      errorcode: 429,
       message: "Too many requests. Please try again later.",
     },
   },
