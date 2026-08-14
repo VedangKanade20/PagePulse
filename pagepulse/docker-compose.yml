@@ -1,6 +1,24 @@
 version: "3.9"
 
 services:
+  app:
+    build: .
+    container_name: pagepulse-app
+
+    ports:
+      - "5000:5000"
+
+    env_file:
+      - .env
+
+    environment:
+      REDIS_URL: redis://redis:6379
+
+    depends_on:
+      - redis
+
+    restart: unless-stopped
+
   redis:
     image: redis:7-alpine
 
